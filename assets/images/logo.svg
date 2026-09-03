@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">ركن العطاء</title>
+  <defs>
+    <linearGradient id="g" x1="8" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E5C57"/>
+      <stop offset="1" stop-color="#1A9B8E"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#g)"/>
+  <path d="M20 44V22.5c0-1.4 1.1-2.5 2.5-2.5H42" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M20 44h24.5c1.4 0 2.5-1.1 2.5-2.5V28" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="42.5" cy="21.5" r="4.2" fill="#E0B04A"/>
+  <path d="M28 33.5h12M28 38.5h8" stroke="#D1FAE5" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

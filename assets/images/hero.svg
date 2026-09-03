@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none" role="img" aria-label="*CHJF (51J #C'/JEJ">
+  <rect x="70" y="90" width="280" height="190" rx="18" fill="#0F172A"/>
+  <rect x="82" y="102" width="256" height="150" rx="10" fill="#0F766E"/>
+  <rect x="96" y="118" width="90" height="10" rx="5" fill="#99F6E4"/>
+  <rect x="96" y="138" width="160" height="8" rx="4" fill="#5EEAD4"/>
+  <rect x="96" y="156" width="130" height="8" rx="4" fill="#2DD4BF"/>
+  <rect x="96" y="186" width="46" height="46" rx="8" fill="#F59E0B"/>
+  <rect x="152" y="186" width="70" height="10" rx="5" fill="#CCFBF1"/>
+  <rect x="152" y="204" width="90" height="8" rx="4" fill="#99F6E4"/>
+  <path d="M350 280c40 0 70 28 70 62H280c0-34 30-62 70-62z" fill="#0F766E"/>
+  <circle cx="350" cy="248" r="28" fill="#14B8A6"/>
+  <path d="M322 214c18-28 38-28 56 0-10 8-18 8-28 0-10 8-18 8-28 0z" fill="#F59E0B"/>
+  <rect x="40" y="250" width="70" height="90" rx="8" fill="#14B8A6"/>
+  <rect x="58" y="238" width="70" height="90" rx="8" fill="#0F766E"/>
+  <rect x="76" y="226" width="70" height="90" rx="8" fill="#F59E0B"/>
+  <path d="M430 120 l40 18 -40 18 -40-18z" fill="#14B8A6"/>
+  <path d="M430 156 l40 18 v70 l-40-18z" fill="#0F766E"/>
+  <path d="M430 156 l-40 18 v70 l40-18z" fill="#F59E0B"/>
+</svg>
