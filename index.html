@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ركن العطاء للخدمات الطلابية | مشاريع التخرج والبحوث والخدمات الأكاديمية</title>
+  <meta name="description" content="ركن العطاء للخدمات الطلابية يقدم خدمات مشاريع التخرج والبحوث والدراسات والمشاريع التقنية والتحليل الإحصائي والعروض والتنسيق والتدقيق.">
+  <meta name="keywords" content="ركن العطاء, خدمات طلابية, مشاريع تخرج, بحوث علمية, مشاريع تقنية, تحليل إحصائي, اليمن">
+  <meta property="og:title" content="ركن العطاء للخدمات الطلابية | مشاريع التخرج والبحوث والخدمات الأكاديمية">
+  <meta property="og:description" content="حلول وخدمات طلابية وأكاديمية وتقنية تساعدك على إنجاز متطلباتك باحتراف ووضوح.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_YE">
+  <meta property="og:image" content="assets/images/logo.svg">
+  <meta name="twitter:card" content="summary">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/logo.svg">
+  <link rel="preload" href="assets/fonts/cairo-400-ar.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cairo-700-ar.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260903">
+  <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("rukn-theme") || "dark");</script>
+</head>
+<body>
+  <noscript><div class="noscript">لتصفح الموقع بالكامل فعّل JavaScript. للتواصل المباشر: +967 735 962 962 عبر الهاتف أو واتساب.</div></noscript>
+  <a class="skip" href="#main">تخطي إلى المحتوى</a>
+  <main id="main">
+    <section class="hero" id="hero" aria-label="القسم الرئيسي">
+      <div class="hero-floating hero-floating-1"></div>
+      <div class="hero-floating hero-floating-2"></div>
+      <div id="heroSlider" class="hero-slider"></div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+
+    <div class="container strip">
+      <div class="trust">
+        <div class="trust-item"><i class="fa-solid fa-check"></i> احترافية</div>
+        <div class="trust-item"><i class="fa-solid fa-bolt"></i> سرعة في الإنجاز</div>
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> سرية وخصوصية</div>
+        <div class="trust-item"><i class="fa-solid fa-comments"></i> متابعة مستمرة</div>
+      </div>
+      <div class="stats" id="homeStats"></div>
+      <nav class="home-toc" aria-label="أقسام الصفحة">
+        <a href="#services">خدماتنا</a>
+        <a href="#need">ما تحتاجه</a>
+        <a href="#specs">التخصصات</a>
+        <a href="#how">كيف نعمل</a>
+        <a href="#why">لماذا نحن</a>
+        <a href="#proposed">مشاريع مقترحة</a>
+        <a href="#works">نماذج الأعمال</a>
+        <a href="#voices">آراء العملاء</a>
+        <a href="#faq">الأسئلة</a>
+        <a href="pages/request.html">اطلب خدمتك</a>
+      </nav>
+    </div>
+
+    <details class="section compact alt fold" id="services">
+      <summary>
+        <div class="section-head">
+          <h2>خدماتنا</h2>
+          <p>اضغط للعرض، ثم مرّر البطاقات أو استخدم الأسهم.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="filters" id="serviceFilters"></div>
+        <div class="carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="servicesGrid"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+        <p class="center-link"><a class="btn btn-ghost" href="pages/services.html">كل الخدمات</a></p>
+      </div>
+    </details>
+
+    <details class="section compact fold" id="need">
+      <summary>
+        <div class="section-head">
+          <h2>ما الخدمة التي تحتاجها؟</h2>
+          <p>اختر احتياجك الحالي وسنوجّهك إلى المسار الأنسب.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="finder">
+          <div class="chips" id="finderChips"></div>
+          <div class="finder-result" id="finderResult"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="section compact alt fold" id="specs">
+      <summary>
+        <div class="section-head">
+          <h2>نخدم مختلف التخصصات</h2>
+          <p>اضغط للاطلاع، أو افتح الصفحة الكاملة.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="carousel" data-carousel data-item="pill">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="homeSpecs"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+        <p class="center-link"><a class="btn btn-ghost" href="pages/specializations.html">عرض كل التخصصات</a></p>
+      </div>
+    </details>
+
+    <details class="section compact fold" id="how">
+      <summary>
+        <div class="section-head">
+          <h2>كيف نعمل؟</h2>
+          <p>خمس خطوات واضحة، تظهر عند الضغط.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="howSteps"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="section compact alt fold" id="why">
+      <summary>
+        <div class="section-head">
+          <h2>لماذا ركن العطاء؟</h2>
+          <p>نعمل بهدوء واحتراف حتى يصل إنجازك بصورة تليق بجهدك.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="whyGrid"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="section compact fold" id="proposed">
+      <summary>
+        <div class="section-head">
+          <h2>مشاريع مقترحة</h2>
+          <p>أفكار حسب التخصص، تظهر عند الضغط.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="homeProposed"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+        <p class="center-link"><a class="btn btn-ghost" href="pages/projects.html">عرض كل المشاريع المقترحة</a></p>
+      </div>
+    </details>
+
+    <details class="section compact alt fold" id="works">
+      <summary>
+        <div class="section-head">
+          <h2>نماذج من أعمالنا</h2>
+          <p>أمثلة توضيحية لطبيعة المشاريع والبحوث والعروض.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="homeProjects"></div>
+          </div>
+          <div class="carousel-nav">
+            <button type="button" class="carousel-btn" data-dir="-1" aria-label="السابق">‹</button>
+            <div class="carousel-dots"></div>
+            <button type="button" class="carousel-btn" data-dir="1" aria-label="التالي">›</button>
+          </div>
+        </div>
+        <p class="center-link"><a class="btn btn-ghost" href="pages/projects.html">كل الأعمال</a></p>
+      </div>
+    </details>
+
+    <details class="section compact fold" id="voices">
+      <summary>
+        <div class="section-head">
+          <h2>ماذا يقول العملاء عنا</h2>
+          <p>آراء توضّح أسلوب التعامل الذي نسعى إليه.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="slider" id="testimonials"></div>
+        <p class="center-link"><a href="https://www.google.com/search?q=%D8%B1%D9%83%D9%86+%D8%A7%D9%84%D8%B9%D8%B7%D8%A7%D8%A1+%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA+%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8%D9%8A%D8%A9+%D8%AA%D8%B9%D8%B2&hl=ar" target="_blank" rel="noopener" class="btn btn-ghost">عرض التقييمات على جوجل</a></p>
+      </div>
+    </details>
+
+    <details class="section compact alt fold" id="faq">
+      <summary>
+        <div class="section-head">
+          <h2>الأسئلة الشائعة</h2>
+          <p>إجابات مباشرة قبل أن تبدأ طلبك.</p>
+        </div>
+      </summary>
+      <div class="container fold-body">
+        <div class="faq" id="faqList"></div>
+        <p class="center-link"><a class="btn btn-ghost" href="pages/faq.html">عرض كل الأسئلة</a></p>
+      </div>
+    </details>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <h2>جاهز تبدأ؟</h2>
+          <p>أرسل تفاصيل طلبك ودعنا نساعدك في تحويل متطلباتك إلى إنجاز.</p>
+          <a class="btn btn-accent" id="ctaWhatsapp" href="pages/request.html">اطلب خدمتك الآن</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="assets/js/data.js?v=20260903" defer></script>
+  <script src="assets/js/app.js?v=20260903" defer></script>
+</body>
+</html>

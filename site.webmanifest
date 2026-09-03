@@ -1,0 +1,19 @@
+{
+  "name": "ركن العطاء للخدمات الطلابية",
+  "short_name": "ركن العطاء",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a1413",
+  "theme_color": "#0a1413",
+  "icons": [
+    {
+      "src": "assets/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
