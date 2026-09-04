@@ -122,13 +122,13 @@
       <div class="header-inner">
         <div class="logo">
           <a class="logo-main" href="${ROOT}index.html">
-                      <img src="${ROOT}assets/images/logo.png" alt="شعار ركن العطاء" width="46" height="46"> 
+                      <img src="${ROOT}assets/images/logo.png" alt="شعار أكاديمية بكر" width="46" height="46"> 
 
           </a>
           <div class="logo-text">
             <a href="${ROOT}index.html">
               <strong>${B.name}</strong>
-              <span>للخدمات الطلابية</span>
+              <span>الرقمية</span>
             </a>
           </div>
         </div>
@@ -163,7 +163,7 @@
             <img src="${ROOT}assets/images/logo.png" alt="" width="44" height="44">
             <span>
               <strong>${B.name}</strong>
-              <small>للخدمات الطلابية</small>
+              <small>الرقمية</small>
             </span>
           </a>
           <p>${B.description}</p>
@@ -233,7 +233,7 @@
         <div class="ai-head">
           <img src="${ROOT}assets/images/ai-assistant.svg" alt="" width="38" height="38">
           <div>
-            <strong>مساعد ركن العطاء</strong>
+            <strong>مساعد أكاديمية بكر</strong>
             <small>متصل الآن · يجيب من خدمات الموقع</small>
           </div>
           <a class="icon-btn ai-wa" href="${B.whatsappUrl}" target="_blank" rel="noopener" aria-label="واتساب">
@@ -779,7 +779,7 @@
       msgs.innerHTML = "";
       lastService = null;
       add(
-        `مرحباً، أنا مساعد <b>ركن العطاء</b>. أوجّهك للخدمة المناسبة، طريقة الطلب، والأسعار التقريبية، أو أفتح لك واتساب.<br>اسأل مثلاً: «أبي مشروع تخرج» أو «كم سعر السيرة الذاتية؟»`,
+        `مرحباً، أنا مساعد <b>أكاديمية بكر</b>. أوجّهك للخدمة المناسبة، طريقة الطلب، والأسعار التقريبية، أو أفتح لك واتساب.<br>اسأل مثلاً: «أبي مشروع تخرج» أو «كم سعر السيرة الذاتية؟»`,
         "bot"
       );
       setChips(DEFAULT_CHIPS);
@@ -819,7 +819,7 @@
         order: scoreKeywords(q, ["كيف اطلب", "طريقه الطلب", "نموذج الطلب", "كيف ابدا", "ارسل طلب", "ابي اطلب"]),
         privacy: scoreKeywords(q, ["سري", "خصوصيه", "سريه", "امان الملفات", "بياناتي"]),
         founder: scoreKeywords(q, ["مؤسس", "ابوبكر", "ابو بكر", "حسان", "abobakr"]),
-        about: scoreKeywords(q, ["من انتم", "عن المركز", "من نحن", "وش تسوون", "ما هو ركن العطاء", "عرفوني بالمركز"]),
+        about: scoreKeywords(q, ["من انتم", "عن المركز", "عن الاكاديميه", "من نحن", "وش تسوون", "ما هي اكاديمية بكر", "ما هي أكاديمية بكر", "عرفوني بالمركز"]),
         location: scoreKeywords(q, ["عنوان", "موقعكم", "وين انتم", "اين انتم", "مقر", "مكانكم", "location"]),
         hours: scoreKeywords(q, ["دوام", "ساعات العمل", "متى تردون", "24"]),
         services: scoreKeywords(q, ["خدماتكم", "ما هي خدمات", "كل الخدمات", "وش الخدمات", "services"]),
@@ -843,7 +843,7 @@
 
       const onlyGreet = intents.greet >= 4 && q.length < 28 && best.sc < 5 && intents.contact < 4 && intents.order < 4;
       if (onlyGreet) {
-        return "وعليكم السلام ومرحباً بك في ركن العطاء. كيف أساعدك؟ يمكنني توجيهك لخدمة، شرح طريقة الطلب، أو فتح واتساب.";
+        return "وعليكم السلام ومرحباً بك في أكاديمية بكر. كيف أساعدك؟ يمكنني توجيهك لخدمة، شرح طريقة الطلب، أو فتح واتساب.";
       }
 
       if (ambiguous) {
@@ -1647,7 +1647,7 @@
       if (!ok) return;
       const svc = RUKN.services.find((s) => s.id === form.service.value);
       const msg = `السلام عليكم،
-أرغب في طلب خدمة من ركن العطاء للخدمات الطلابية.
+أرغب في طلب خدمة من أكاديمية بكر الرقمية.
 الاسم: ${form.fullname.value}
 الجامعة: ${form.university.value}
 التخصص: ${form.spec.value}
@@ -1683,7 +1683,7 @@
         if (phoneErr) phoneErr.style.display = "block";
       }
       if (!ok) return;
-      const msg = `السلام عليكم، رسالة من موقع ركن العطاء
+      const msg = `السلام عليكم، رسالة من موقع أكاديمية بكر الرقمية
 الاسم: ${form.fullname.value}
 الهاتف: ${form.phone.value}
 الرسالة: ${form.message.value}`;
