@@ -75,23 +75,6 @@
     return norm(hay).indexOf(nq) !== -1;
   }
 
-  function flattenProposed() {
-    return (RUKN.proposed || []).flatMap((g) =>
-      g.items.map((p) => ({
-        ...p,
-        group: g.id,
-        spec: p.spec || g.spec,
-        type: g.id,
-        typeLabel: g.name,
-        icon: p.icon || g.icon,
-        cover: p.cover,
-        year: "مقترح",
-        proposed: true,
-        image: p.image
-      }))
-    );
-  }
-
   function pageFile() {
     const here = location.pathname.replace(/\\/g, "/");
     const name = here.split("/").pop() || "index.html";
@@ -122,13 +105,13 @@
       <div class="header-inner">
         <div class="logo">
           <a class="logo-main" href="${ROOT}index.html">
-                      <img src="${ROOT}assets/images/logo.png" alt="شعار أكاديمية بكر" width="46" height="46"> 
+                      <img src="${ROOT}assets/images/logo.png" alt="شعار ${B.fullName}" width="46" height="46"> 
 
           </a>
           <div class="logo-text">
             <a href="${ROOT}index.html">
               <strong>${B.name}</strong>
-              <span>الرقمية</span>
+              <span>${B.tagline}</span>
             </a>
           </div>
         </div>
@@ -163,11 +146,12 @@
             <img src="${ROOT}assets/images/logo.png" alt="" width="44" height="44">
             <span>
               <strong>${B.name}</strong>
-              <small>الرقمية</small>
+              <small>${B.tagline}</small>
             </span>
           </a>
           <p>${B.description}</p>
-          <a class="footer-founder" href="${B.founder.url}" target="_blank" rel="noopener">المؤسس: ${B.founder.name}</a>
+          <a class="footer-founder" href="${B.founder.url}" target="_blank" rel="noopener">${B.founder.honorific || B.founder.name}</a>
+          <small class="footer-role">${B.founder.title || B.founder.role}</small>
           <div class="footer-cta">
             <a class="btn btn-accent" href="${ROOT}pages/request.html">اطلب خدمتك</a>
             <a class="btn btn-ghost footer-wa-btn" href="${B.whatsappUrl}" target="_blank" rel="noopener">واتساب</a>
@@ -203,7 +187,7 @@
       </div>
       <div class="container footer-bottom">
         <span>© ${B.year} ${B.fullName}</span>
-        <a href="${B.founder.url}" target="_blank" rel="noopener">تأسيس وإشراف تقني: ${B.founder.name}</a>
+        <a href="${B.founder.url}" target="_blank" rel="noopener">إشراف تقني: ${B.founder.name}</a>
       </div>
     `;
     document.body.appendChild(footer);
@@ -223,8 +207,8 @@
       <div class="ai-pop" id="aiWelcome" role="status" aria-live="polite">
         <img class="ai-pop-logo" src="${ROOT}assets/images/ai-assistant.svg" alt="" width="46" height="46">
         <div class="ai-pop-text">
-          <strong>أنا مساعدك الذكي</strong>
-          <span>دائماً هنا لخدمتك، ماذا تحتاج اليوم؟</span>
+          <strong>هل تحتاج مساعدة؟</strong>
+          <span>اكتب ما تحتاجه، وسأقترح الخدمة وأفتح لك طلبها.</span>
         </div>
         <button type="button" class="ai-pop-action" id="aiWelcomeAction">ابدأ</button>
         <button type="button" class="ai-pop-close" id="aiWelcomeClose" aria-label="إغلاق الرسالة">×</button>
@@ -233,8 +217,8 @@
         <div class="ai-head">
           <img src="${ROOT}assets/images/ai-assistant.svg" alt="" width="38" height="38">
           <div>
-            <strong>مساعد أكاديمية بكر</strong>
-            <small>متصل الآن · يجيب من خدمات الموقع</small>
+            <strong>مساعد بكر</strong>
+            <small>يختار الخدمة المناسبة ويفتح طلبها</small>
           </div>
           <a class="icon-btn ai-wa" href="${B.whatsappUrl}" target="_blank" rel="noopener" aria-label="واتساب">
             <i class="fa-brands fa-whatsapp"></i>
@@ -244,7 +228,7 @@
         <div class="ai-msgs" id="aiMsgs" role="log" aria-live="polite"></div>
         <div class="ai-quick" id="aiQuick"></div>
         <form class="ai-form" id="aiForm">
-          <input id="aiInput" type="text" placeholder="اسأل عن خدمة، السعر، أو طريقة الطلب..." autocomplete="off" maxlength="400">
+          <input id="aiInput" type="text" placeholder="مثال: أريد مشروع تخرج، بحث علمي، أو تصميم موقع" autocomplete="off" maxlength="400">
           <button class="btn btn-primary" type="submit" aria-label="إرسال">➤</button>
         </form>
       </div>
@@ -483,11 +467,6 @@
         d: p.spec + " — " + p.typeLabel,
         h: `${ROOT}pages/project-details.html?id=${p.id}`
       })),
-      ...flattenProposed().map((p) => ({
-        t: p.title,
-        d: p.typeLabel + " — مشروع مقترح",
-        h: `${ROOT}pages/project-details.html?id=${p.id}`
-      })),
       ...RUKN.specializations.map((s) => ({
         t: s.name,
         d: "تخصص · " + s.group,
@@ -550,10 +529,11 @@
     return `
       <div class="shape-panel shape-grad" aria-hidden="true">
         <span class="ring"></span>
-        <span class="shape-core"><i class="fa-solid ${s.icon}"></i></span>
+        <span class="shape-core"><img src="${ROOT}assets/images/logo.png" alt="" width="72" height="72"></span>
         <span class="shape-chip c1">تخرج</span>
         <span class="shape-chip c2">بحوث</span>
         <span class="shape-chip c3">تقنية</span>
+        <span class="shape-chip c4 g-chip-mini"><i class="fa-brands fa-google"></i> تقييمات جوجل</span>
       </div>`;
   }
 
@@ -562,6 +542,8 @@
     if (!box || !RUKN.slides) return;
     let i = 0;
     const slides = RUKN.slides;
+    const gUrl = (B.googleReviews && B.googleReviews.searchUrl) || B.whatsappUrl;
+    const founderName = (B.founder && (B.founder.honorific || B.founder.name)) || "";
     box.innerHTML = `
       <div class="hero-slides">
         ${slides
@@ -573,6 +555,15 @@
                 <span class="eyebrow">${s.eyebrow}</span>
                 <h1>${s.title}</h1>
                 <p class="lead">${s.text}</p>
+                <div class="hero-proof">
+                  <a class="g-chip" href="${gUrl}" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
+                    <span class="g-stars" aria-hidden="true">★★★★★</span>
+                    <span>تقييمات جوجل</span>
+                  </a>
+                  <span class="proof-item">${founderName}</span>
+                  <span class="proof-item">${B.city}</span>
+                </div>
                 <div class="hero-actions">
                   <a class="btn btn-primary" href="${hrefOf(s.href)}">${s.cta}</a>
                   <a class="btn btn-ghost" href="${hrefOf(s.ghostHref)}">${s.ghost}</a>
@@ -625,6 +616,19 @@
       },
       { passive: true }
     );
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion && slides.length > 1) {
+      let timer = setInterval(() => go(i + 1), 7000);
+      const stop = () => clearInterval(timer);
+      const play = () => {
+        stop();
+        timer = setInterval(() => go(i + 1), 7000);
+      };
+      box.addEventListener("mouseenter", stop);
+      box.addEventListener("mouseleave", play);
+      box.addEventListener("focusin", stop);
+      box.addEventListener("focusout", play);
+    }
   }
 
   function bindCarousel(root) {
@@ -730,36 +734,61 @@
 
     let lastService = null;
     let busy = false;
-    const DEFAULT_CHIPS = ["مشروع تخرج", "بحث علمي", "موقع إلكتروني", "سيرة ذاتية", "الأسعار", "طريقة الطلب", "واتساب"];
+    const DEFAULT_CHIPS = ["مشروع تخرج", "بحث علمي", "موقع إلكتروني", "سيرة ذاتية", "كيف أطلب؟", "واتساب"];
+    const STOP = new Set([
+      "اريد", "ابي", "ابغى", "محتاج", "احتاج", "ساعدني", "لو", "سمحت", "هل", "يمكن",
+      "عندي", "كيف", "وش", "ما", "هذا", "هذه", "الي", "من", "في", "على", "طلب", "خدمه", "خدمات"
+    ]);
 
-    const link = (href, label) =>
-      `<a href="${href}"${href.startsWith("http") || href.startsWith("mailto:") ? ' target="_blank" rel="noopener"' : ""}>${label}</a>`;
+    const pageService = () => {
+      if (pageFile() !== "service-details.html") return null;
+      const id = new URLSearchParams(location.search).get("id");
+      return RUKN.services.find((x) => x.id === id) || null;
+    };
+    const link = (href, label, cls) =>
+      `<a href="${href}"${href.startsWith("http") || href.startsWith("mailto:") ? ' target="_blank" rel="noopener"' : ""}${
+        cls ? ` class="${cls}"` : ""
+      }>${label}</a>`;
     const svcLinks = (s) =>
-      `${link(ROOT + "pages/service-details.html?id=" + s.id, "التفاصيل")} · ${link(
+      `<span class="ai-cta-row">${link(
         ROOT + "pages/request.html?service=" + s.id,
-        "اطلب الخدمة"
-      )}`;
+        "طلب الخدمة",
+        "ai-cta"
+      )}${link(ROOT + "pages/service-details.html?id=" + s.id, "التفاصيل", "ai-cta ghost")}</span>`;
     const durationOf = (s) => {
       const d = (s.duration || "").trim();
       return d || "تُحدَّد بعد مراجعة الطلب";
     };
+    const waFor = (s) =>
+      s
+        ? waTextUrl(`السلام عليكم، أرغب بطلب خدمة: ${s.name}`)
+        : B.whatsappUrl;
     const serviceReply = (s) => {
       lastService = s;
-      return `<b>${s.name}</b><br>${s.short}<br>المدة التقريبية: ${durationOf(s)}<br>${svcLinks(s)}`;
+      return `<b>${s.name}</b><br>${s.short}<br>المدة التقريبية: ${durationOf(s)}${svcLinks(s)}`;
     };
     const contactReply = () =>
-      `تواصل مباشرة عبر الهاتف <a href="tel:${B.phoneTel}">${B.phoneDisplay}</a> أو ${link(B.whatsappUrl, "واتساب")} أو البريد ${link("mailto:" + B.email, B.email)}. ${link(ROOT + "pages/contact.html", "صفحة التواصل")}`;
+      `تواصل مباشرة عبر الهاتف <a href="tel:${B.phoneTel}">${B.phoneDisplay}</a> أو ${link(waFor(lastService), "واتساب")} أو البريد ${link("mailto:" + B.email, B.email)}. ${link(ROOT + "pages/contact.html", "صفحة التواصل")}`;
     const orderReply = (s) =>
       s
-        ? `لطلب «${s.name}»: افتح النموذج، راجع البيانات، ثم أرسل الرسالة الجاهزة عبر واتساب. ${link(
-            ROOT + "pages/request.html?service=" + s.id,
-            "فتح نموذج الطلب"
-          )}`
-        : `اضغط «اطلب خدمتك»، عبّئ النموذج، ثم أرسل الرسالة الجاهزة عبر واتساب. ${link(ROOT + "pages/request.html", "فتح نموذج الطلب")}`;
+        ? `لطلب «${s.name}» عبّئ النموذج ثم أكمل عبر واتساب، أو راسلنا مباشرة.${svcLinks(s)}<span class="ai-cta-row">${link(
+            waFor(s),
+            "واتساب",
+            "ai-cta ghost"
+          )}</span>`
+        : `اختر الخدمة ثم عبّئ النموذج، أو راسلنا على واتساب وسنوجّهك.<span class="ai-cta-row">${link(
+            ROOT + "pages/request.html",
+            "نموذج الطلب",
+            "ai-cta"
+          )}${link(B.whatsappUrl, "واتساب", "ai-cta ghost")}</span>`;
     const priceReply = (s) =>
       s
-        ? `تكلفة «${s.name}» ليست ثابتة؛ تعتمد على نطاق العمل والمدة. بعد مراجعة التفاصيل نرسل عرضاً واضحاً قبل البدء. المدة التقريبية: ${durationOf(s)}.<br>${svcLinks(s)}`
-        : `لا توجد قائمة أسعار ثابتة. بعد مراجعة نطاق العمل والموعد نوضّح العرض قبل البدء. ${link(ROOT + "pages/request.html", "أرسل تفاصيل طلبك")}`;
+        ? `تكلفة «${s.name}» ليست ثابتة؛ تعتمد على نطاق العمل والمدة. بعد مراجعة التفاصيل نرسل عرضاً واضحاً قبل البدء. المدة التقريبية: ${durationOf(s)}.${svcLinks(s)}`
+        : `لا توجد قائمة أسعار ثابتة. بعد مراجعة نطاق العمل والموعد نوضّح العرض قبل البدء.<span class="ai-cta-row">${link(
+            ROOT + "pages/request.html",
+            "أرسل تفاصيل طلبك",
+            "ai-cta"
+          )}</span>`;
 
     const setChips = (labels) => {
       quick.innerHTML = (labels || DEFAULT_CHIPS).map((l) => `<button type="button" class="chip">${l}</button>`).join("");
@@ -777,26 +806,44 @@
 
     const welcome = () => {
       msgs.innerHTML = "";
-      lastService = null;
+      const current = pageService();
+      lastService = current;
+      if (current) {
+        add(
+          `أهلاً بك. أنت في صفحة <b>${current.name}</b>. يمكنني فتح طلبها الآن، أو توضيح السعر والمدة.`,
+          "bot"
+        );
+        setChips(["اطلب هذه الخدمة", "سعر تقريبي", "واتساب", "خدمة أخرى"]);
+        return;
+      }
       add(
-        `مرحباً، أنا مساعد <b>أكاديمية بكر</b>. أوجّهك للخدمة المناسبة، طريقة الطلب، والأسعار التقريبية، أو أفتح لك واتساب.<br>اسأل مثلاً: «أبي مشروع تخرج» أو «كم سعر السيرة الذاتية؟»`,
+        `أهلاً بك في <b>${B.fullName}</b>. اكتب احتياجك وسأقترح الخدمة المناسبة وأفتح لك طلبها مباشرة.<br>مثلاً: مشروع تخرج، بحث علمي، أو تصميم موقع.`,
         "bot"
       );
       setChips(DEFAULT_CHIPS);
     };
 
-    const rankServices = (q) =>
-      RUKN.services
+    const rankServices = (q) => {
+      const qWords = norm(q)
+        .split(" ")
+        .filter((w) => w.length >= 3 && !STOP.has(w));
+      return RUKN.services
         .map((s) => {
           const aliases = (RUKN.serviceAliases && RUKN.serviceAliases[s.id]) || [];
-          return { s, sc: scoreKeywords(q, [s.name, s.id, ...aliases]) };
+          const hay = norm([s.name, s.id, s.short, ...aliases].join(" "));
+          let sc = scoreKeywords(q, [s.name, s.id, ...aliases]);
+          qWords.forEach((w) => {
+            if (hay.indexOf(w) !== -1) sc += 2;
+          });
+          return { s, sc };
         })
         .sort((a, b) => b.sc - a.sc);
+    };
 
     const reply = (raw) => {
       const q = raw.trim();
       const nq = norm(q);
-      if (!nq) return "اكتب سؤالك عن خدمة، السعر، طريقة الطلب، أو رقم التواصل.";
+      if (!nq) return "اكتب اسم الخدمة أو احتياجك، مثل: مشروع تخرج، بحث، موقع إلكتروني.";
 
       if (/^(نعم|ايوه|اي|ايه|ok|okay|تمام|حسنا|حسناً|موافق)$/.test(nq) && lastService) {
         return orderReply(lastService);
@@ -805,8 +852,8 @@
       const hits = rankServices(q);
       const best = hits[0] || { s: null, sc: 0 };
       const second = hits[1] || { s: null, sc: 0 };
-      const strongSvc = best.sc >= 5;
-      const ambiguous = strongSvc && second.sc >= 5 && best.sc - second.sc < 2 && best.s.id !== second.s.id;
+      const strongSvc = best.sc >= 4;
+      const ambiguous = strongSvc && second.sc >= 4 && best.sc - second.sc < 2 && best.s.id !== second.s.id;
       const svc = strongSvc && !ambiguous ? best.s : null;
 
       const intents = {
@@ -816,10 +863,11 @@
         contact: scoreKeywords(q, ["واتساب", "whatsapp", "رقم", "هاتف", "جوال", "تواصل", "ايميل", "بريد", "email", "اتصال", "تلفون"]),
         price: scoreKeywords(q, ["سعر", "اسعار", "تكلفه", "تكلف", "فلوس", "رسوم", "كم يكلف", "كم السعر", "price", "cost"]),
         duration: scoreKeywords(q, ["مده", "كم يوم", "كم اسبوع", "تستغرق", "متى يجهز", "موعد تسليم", "كم تاخذ"]),
-        order: scoreKeywords(q, ["كيف اطلب", "طريقه الطلب", "نموذج الطلب", "كيف ابدا", "ارسل طلب", "ابي اطلب"]),
+        order: scoreKeywords(q, ["كيف اطلب", "طريقه الطلب", "نموذج الطلب", "كيف ابدا", "ارسل طلب", "ابي اطلب", "طلب الخدمه", "اطلب", "طلب الخدمه"]),
+        help: scoreKeywords(q, ["ساعدني", "ما ادري", "وش تنصح", "اقترح علي", "ما المناسب", "وش اطلب"]),
         privacy: scoreKeywords(q, ["سري", "خصوصيه", "سريه", "امان الملفات", "بياناتي"]),
-        founder: scoreKeywords(q, ["مؤسس", "ابوبكر", "ابو بكر", "حسان", "abobakr"]),
-        about: scoreKeywords(q, ["من انتم", "عن المركز", "عن الاكاديميه", "من نحن", "وش تسوون", "ما هي اكاديمية بكر", "ما هي أكاديمية بكر", "عرفوني بالمركز"]),
+        founder: scoreKeywords(q, ["مؤسس", "ابوبكر", "ابو بكر", "حسان", "abobakr", "المهندس ابوبكر", "المهندس أبوبكر", "eng abobakr", "المشرف"]),
+        about: scoreKeywords(q, ["من انتم", "عن المركز", "عن الاكاديميه", "من نحن", "وش تسوون", "ما هي اكاديمية بكر", "ما هي أكاديمية بكر", "بكر الحلول", "ما هي بكر الحلول", "عرفوني بالمركز"]),
         location: scoreKeywords(q, ["عنوان", "موقعكم", "وين انتم", "اين انتم", "مقر", "مكانكم", "location"]),
         hours: scoreKeywords(q, ["دوام", "ساعات العمل", "متى تردون", "24"]),
         services: scoreKeywords(q, ["خدماتكم", "ما هي خدمات", "كل الخدمات", "وش الخدمات", "services"]),
@@ -843,7 +891,7 @@
 
       const onlyGreet = intents.greet >= 4 && q.length < 28 && best.sc < 5 && intents.contact < 4 && intents.order < 4;
       if (onlyGreet) {
-        return "وعليكم السلام ومرحباً بك في أكاديمية بكر. كيف أساعدك؟ يمكنني توجيهك لخدمة، شرح طريقة الطلب، أو فتح واتساب.";
+        return `وعليكم السلام. أهلاً بك في ${B.fullName}. ما الخدمة التي تحتاجها اليوم؟`;
       }
 
       if (ambiguous) {
@@ -861,13 +909,21 @@
       if (intents.contact >= 4 && (!svc || intents.contact >= best.sc)) return contactReply();
       if (intents.founder >= 4) {
         const F = B.founder;
-        return `المؤسس <b>${F.name}</b> — ${F.title}. ${F.bio}<br>${link(F.url, "الموقع الشخصي")} · ${link(
+        return `${F.honorific || F.name}، ${F.title || "يشرف على الحلول التقنية"} في ${B.fullName}.<span class="ai-cta-row">${link(
           ROOT + "pages/about.html#founder",
-          "من نحن"
-        )}`;
+          "من نحن",
+          "ai-cta"
+        )}${link(F.url, "الموقع الشخصي", "ai-cta ghost")}</span>`;
+      }
+      if (intents.help >= 4 && !svc) {
+        return `أخبرني بما تحتاجه: مشروع تخرج، بحث، موقع، سيرة ذاتية، أو أي خدمة أخرى وسأفتح لك طلبها.<span class="ai-cta-row">${link(
+          ROOT + "pages/services.html",
+          "تصفح الخدمات",
+          "ai-cta"
+        )}${link(ROOT + "pages/request.html", "نموذج الطلب", "ai-cta ghost")}</span>`;
       }
       if (intents.about >= 4 && !svc) {
-        return `${B.fullName}: ${B.description} نعمل من ${B.city}، و${B.workMode}. ${link(
+        return `${B.fullName}: ${B.about} ${link(
           ROOT + "pages/about.html",
           "اقرأ المزيد"
         )}`;
@@ -880,7 +936,7 @@
       }
       if (intents.hours >= 4) return `الدعم ${B.hours} (${RUKN.stats.support}). أسرع قناة هي واتساب.`;
       if (intents.privacy >= 4) {
-        return `نعم، ملفاتك ومتطلباتك تُعامل بخصوصية ولا تُعرض كأعمال عامة. النماذج في الموقع توضيحية. ${link(
+        return `نعم، ملفاتك ومتطلباتك تُعامل بخصوصية ولا تُعرض كأعمال عامة. ${link(
           ROOT + "pages/privacy.html",
           "سياسة الخصوصية"
         )}`;
@@ -905,7 +961,7 @@
         return `هذه خدماتنا:<br>${byCat}<br>${link(ROOT + "pages/services.html", "عرض صفحة الخدمات")}`;
       }
       if (intents.specs >= 4 && !svc) {
-        return `نخدم تخصصات تقنية وإدارية وهندسية وتربوية وإنسانية. إن لم يظهر تخصصك في القائمة راسلنا. ${link(
+        return `نخدم تخصصات تقنية وإدارية وهندسية. إن لم يظهر تخصصك في القائمة راسلنا. ${link(
           ROOT + "pages/specializations.html",
           "عرض التخصصات"
         )}`;
@@ -925,14 +981,13 @@
 
       if (svc) return serviceReply(svc);
 
-      const projects = [
-        ...flattenProposed().map((p) => ({ p, sc: scoreKeywords(q, [p.title, p.spec, p.summary]) })),
-        ...(RUKN.projects || []).map((p) => ({ p, sc: scoreKeywords(q, [p.title, p.spec, p.summary]) }))
-      ].sort((a, b) => b.sc - a.sc);
+      const projects = (RUKN.projects || [])
+        .map((p) => ({ p, sc: scoreKeywords(q, [p.title, p.spec, p.summary]) }))
+        .sort((a, b) => b.sc - a.sc);
       if (projects[0] && projects[0].sc >= 7) {
         const p = projects[0].p;
         return `<b>${p.title}</b><br>${p.summary}<br>${link(ROOT + "pages/project-details.html?id=" + p.id, "تفاصيل المشروع")} · ${link(
-          ROOT + "pages/request.html?service=" + (p.proposed ? "tech" : p.type || "tech"),
+          ROOT + "pages/request.html?service=" + (p.type || "tech"),
           "اطلب مشروعاً مشابهاً"
         )}`;
       }
@@ -942,10 +997,21 @@
         .sort((a, b) => b.sc - a.sc);
       if (faqHits[0] && faqHits[0].sc >= 5) return faqHits[0].f.a;
 
-      return `لم أتأكد تماماً من المطلوب في «${escapeHtml(q)}». يمكنك اختيار خيار سريع بالأسفل، ${link(
+      if (best.sc >= 3 && best.s) {
+        lastService = best.s;
+        const near = hits.filter((h) => h.sc >= 3).slice(0, 3);
+        if (near.length > 1) {
+          return `أقرب الخدمات لطلبك:<br>${near
+            .map((h) => `<b>${h.s.name}</b><br>${h.s.short}${svcLinks(h.s)}`)
+            .join("")}`;
+        }
+        return `هل تقصد <b>${best.s.name}</b>؟<br>${best.s.short}${svcLinks(best.s)}`;
+      }
+      return `لم أتضح الطلب بعد. اختر خياراً سريعاً بالأسفل، أو تصفّح الخدمات، أو راسلنا على واتساب.<span class="ai-cta-row">${link(
         ROOT + "pages/services.html",
-        "تصفح الخدمات"
-      )}، أو ${link(B.whatsappUrl, "مراسلتنا على واتساب")}.`;
+        "تصفح الخدمات",
+        "ai-cta"
+      )}${link(B.whatsappUrl, "واتساب", "ai-cta ghost")}</span>`;
     };
 
     const ask = (q) => {
@@ -1033,8 +1099,16 @@
       const b = e.target.closest("button");
       if (!b) return;
       const label = b.textContent.trim();
-      if (label === "اطلب هذه الخدمة" && lastService) {
-        ask("كيف أطلب خدمة " + lastService.name);
+      if ((label === "اطلب هذه الخدمة" || label === "كيف أطلب؟") && lastService) {
+        location.href = ROOT + "pages/request.html?service=" + lastService.id;
+        return;
+      }
+      if (label === "كيف أطلب؟") {
+        ask("كيف أطلب خدمة");
+        return;
+      }
+      if (label === "واتساب") {
+        window.open(waFor(lastService), "_blank", "noopener");
         return;
       }
       if (label === "سعر تقريبي" && lastService) {
@@ -1103,7 +1177,10 @@
         <div class="icon-wrap"><i class="fa-solid ${s.icon}"></i></div>
         <h3>${s.name}</h3>
         <p>${s.short}</p>
-        <button class="btn btn-ghost" type="button" data-service="${s.id}">عرض التفاصيل</button>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${s.id}">طلب الخدمة</a>
+          <button class="btn btn-ghost" type="button" data-service="${s.id}">التفاصيل</button>
+        </div>
       </article>`;
   }
 
@@ -1147,7 +1224,7 @@
       <h3>ماذا يشمل العمل؟</h3>
       <ul class="check-list">${s.includes.map((i) => `<li>${i}</li>`).join("")}</ul>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${s.id}">اطلب هذه الخدمة</a>
+        <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${s.id}">طلب الخدمة</a>
         <a class="btn btn-ghost" href="${ROOT}pages/service-details.html?id=${s.id}">صفحة التفاصيل</a>
       </div>`;
     $("#serviceModal").hidden = false;
@@ -1343,71 +1420,21 @@
       </article>`;
   }
 
-  function proposedCatalog() {
-    const box = $("#proposedCatalog");
-    if (!box) return;
-    const search = $("#projectSearch");
-    const filters = $("#projectFilters");
-    let current = "all";
-    const draw = () => {
-      const q = (search && search.value.trim()) || "";
-      const groups = (RUKN.proposed || []).filter((g) => current === "all" || g.id === current);
-      let first = true;
-      const html = groups
-        .map((g) => {
-          const items = flattenProposed().filter(
-            (p) => p.group === g.id && (!q || matchesQuery(p.title + " " + p.summary + " " + p.spec, q))
-          );
-          if (!items.length) return "";
-          const open = current !== "all" || !!q || first;
-          first = false;
-          return `<details class="fold page-fold catalog-group"${open ? " open" : ""}>
-            <summary><h2><i class="fa-solid ${g.icon}"></i> ${g.name}</h2><small>${items.length} مشروع</small></summary>
-            <div class="cards-3 fold-body">${items.map(projectCard).join("")}</div>
-          </details>`;
-        })
-        .join("");
-      box.innerHTML = html || "<p>لا توجد مشاريع مطابقة لبحثك.</p>";
-    };
-    if (filters) {
-      filters.addEventListener("click", (e) => {
-        const btn = e.target.closest("[data-type]");
-        if (!btn) return;
-        $all("[data-type]", filters).forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        current = btn.dataset.type;
-        draw();
-      });
-    }
-    if (search) search.addEventListener("input", draw);
-    draw();
-  }
-
-  function homeProposed() {
-    const box = $("#homeProposed");
-    if (!box) return;
-    const list = (RUKN.proposed || [])
-      .map((g) => flattenProposed().find((p) => p.group === g.id))
-      .filter(Boolean);
-    box.innerHTML = list.map(projectCard).join("");
-  }
-
   function projects(target, limit) {
     const box = $(target);
     if (!box) return;
     const search = $("#projectSearch");
-    const proposed = $("#proposedCatalog");
     const draw = (type) => {
       const q = (search && search.value.trim()) || "";
       const list = RUKN.projects
-        .filter((p) => proposed || !type || type === "all" || p.type === type)
+        .filter((p) => !type || type === "all" || p.type === type)
         .filter((p) => !q || matchesQuery(p.title + " " + p.spec + " " + p.summary, q))
         .slice(0, limit || 99);
       box.innerHTML = list.length ? list.map(projectCard).join("") : "<p>لا توجد أعمال مطابقة.</p>";
     };
     const filters = $("#projectFilters");
     let current = box.dataset.filter || "all";
-    if (filters && !proposed) {
+    if (filters) {
       filters.addEventListener("click", (e) => {
         const btn = e.target.closest("[data-type]");
         if (!btn) return;
@@ -1424,33 +1451,32 @@
   function testimonials() {
     const box = $("#testimonials");
     if (!box) return;
-    let i = 0;
-    const render = () => {
-      const t = RUKN.testimonials[i];
-      box.innerHTML = `
-        <div class="quote-slider">
-          <button type="button" class="hero-arrow" data-dir="-1" aria-label="السابق">‹</button>
-          <div class="quote">
-            <div class="stars">★★★★★</div>
-            <p>«${t.text}»</p>
-            <b>${t.name}</b>
-            <small>${t.role}</small>
-          </div>
-          <button type="button" class="hero-arrow" data-dir="1" aria-label="التالي">›</button>
-        </div>
-        <div class="slider-nav">${RUKN.testimonials
-          .map((_, idx) => `<button class="dot ${idx === i ? "active" : ""}" data-i="${idx}" aria-label="رأي ${idx + 1}"></button>`)
-          .join("")}</div>`;
-    };
-    render();
-    box.addEventListener("click", (e) => {
-      const d = e.target.closest(".dot");
-      const arrow = e.target.closest("[data-dir]");
-      if (d) i = Number(d.dataset.i);
-      if (arrow) i = (i + Number(arrow.dataset.dir) + RUKN.testimonials.length) % RUKN.testimonials.length;
-      if (!d && !arrow) return;
-      render();
-    });
+    const g = B.googleReviews || {};
+    const gUrl = g.searchUrl || g.mapsUrl || "#";
+    box.innerHTML = `
+      <div class="reviews-grid">
+        ${RUKN.testimonials
+          .map(
+            (t) => `
+          <article class="review-card">
+            <header class="review-head">
+              <span class="review-avatar" aria-hidden="true">${escapeHtml(t.name.charAt(0))}</span>
+              <div>
+                <b>${escapeHtml(t.name)}</b>
+                <small>${escapeHtml(t.role)}</small>
+              </div>
+              <i class="fa-brands fa-google review-g" aria-hidden="true"></i>
+            </header>
+            <div class="stars" aria-label="تقييم خمس نجوم">★★★★★</div>
+            <p>«${escapeHtml(t.text)}»</p>
+            <span class="review-source">تقييم على جوجل</span>
+          </article>`
+          )
+          .join("")}
+      </div>
+      <p class="center-link reviews-cta">
+        <a class="btn btn-primary" href="${gUrl}" target="_blank" rel="noopener"><i class="fa-brands fa-google"></i> عرض كل التقييمات على جوجل</a>
+      </p>`;
   }
 
   function faqs() {
@@ -1489,7 +1515,10 @@
       </div>
       <h2>ماذا يشمل العمل؟</h2>
       <ul class="check-list">${s.includes.map((i) => `<li>${i}</li>`).join("")}</ul>
-      <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${s.id}">اطلب هذه الخدمة</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${s.id}">طلب الخدمة</a>
+        <a class="btn btn-ghost" href="${waTextUrl("السلام عليكم، أرغب بطلب خدمة: " + s.name)}" target="_blank" rel="noopener">واتساب</a>
+      </div>
       <div class="item-pager">
         <a class="btn btn-ghost" href="${ROOT}pages/service-details.html?id=${prevS.id}">‹ ${prevS.name}</a>
         <a class="btn btn-ghost" href="${ROOT}pages/services.html">كل الخدمات</a>
@@ -1506,7 +1535,7 @@
       <div class="cards-3">${related
         .map(
           (x) =>
-            `<article class="card"><h3>${x.name}</h3><p>${x.short}</p><a class="btn btn-ghost" href="${ROOT}pages/service-details.html?id=${x.id}">التفاصيل</a></article>`
+            `<article class="card"><h3>${x.name}</h3><p>${x.short}</p><div class="card-actions"><a class="btn btn-primary" href="${ROOT}pages/request.html?service=${x.id}">طلب الخدمة</a><a class="btn btn-ghost" href="${ROOT}pages/service-details.html?id=${x.id}">التفاصيل</a></div></article>`
         )
         .join("")}</div>`
           : ""
@@ -1515,7 +1544,7 @@
   }
 
   function itemPagerHtml(p) {
-    const list = p.proposed ? flattenProposed() : RUKN.projects;
+    const list = RUKN.projects;
     const i = list.findIndex((x) => x.id === p.id);
     if (i < 0) return "";
     const prev = list[(i - 1 + list.length) % list.length];
@@ -1531,10 +1560,7 @@
     const box = $("#projectDetails");
     if (!box) return;
     const id = new URLSearchParams(location.search).get("id") || "p1";
-    const p =
-      flattenProposed().find((x) => x.id === id) ||
-      RUKN.projects.find((x) => x.id === id) ||
-      RUKN.projects[0];
+    const p = RUKN.projects.find((x) => x.id === id) || RUKN.projects[0];
     document.title = `${p.title} | ${B.fullName}`;
     const images = projectImages(p);
     box.innerHTML = `
@@ -1544,14 +1570,7 @@
       <div class="meta"><span class="tag">${p.spec}</span><span class="tag">${p.typeLabel}</span><span class="tag">${p.year}</span></div>
       <p>${p.summary}</p>
       <p>${p.details}</p>
-      ${
-        p.proposed
-          ? "<p>هذا مقترح لمشروع تخرج أو نظام عملي يمكن تنفيذه حسب متطلبات جامعتك.</p>"
-          : p.featured
-            ? ""
-            : "<p>هذا النموذج توضيحي لطبيعة الأعمال، ولا يمثل ملفاً لطالب معيّن.</p>"
-      }
-      <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${p.proposed ? "tech" : p.type}">اطلب مشروعاً مشابهاً</a>
+      <a class="btn btn-primary" href="${ROOT}pages/request.html?service=${p.type || "tech"}">اطلب مشروعاً مشابهاً</a>
       ${itemPagerHtml(p)}
     `;
   }
@@ -1562,24 +1581,23 @@
     $all("[data-founder]").forEach((box) => {
       box.innerHTML = `
         <div class="founder-layout">
-          <img class="founder-photo" src="${ROOT}assets/images/Abobakr_Hassan.png" alt="${escapeHtml(F.name)}" width="160" height="160">
           <div>
-            <span class="tag">المؤسس</span>
-            <h3>${F.name}</h3>
+            <span class="tag">مهندس برمجيات</span>
+            <h3>${F.honorific || F.name}</h3>
             <p class="muted-line">${F.title}</p>
             <p>${F.bio}</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="${F.url}" target="_blank" rel="noopener">الموقع الشخصي: Abobakrh.com</a>
-              <a class="btn btn-ghost" href="${F.youtube}" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> شاهد الفيديو</a>
+              <a class="btn btn-primary" href="${F.url}" target="_blank" rel="noopener">الموقع الشخصي</a>
+              <a class="btn btn-ghost" href="${F.youtube}" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> شاهد الكلمة</a>
               ${
                 pageFile() === "about.html"
                   ? `<a class="btn btn-ghost" href="${ROOT}pages/request.html">اطلب خدمتك</a>`
-                  : `<a class="btn btn-ghost" href="${ROOT}pages/about.html#founder">من نحن والمؤسس</a>`
+                  : `<a class="btn btn-ghost" href="${ROOT}pages/about.html#founder">من نحن</a>`
               }
             </div>
             ${
               F.youtubeId
-                ? `<div class="video-frame"><iframe src="https://www.youtube.com/embed/${F.youtubeId}" title="${F.videoTitle || "فيديو المؤسس"}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
+                ? `<div class="video-frame"><iframe src="https://www.youtube.com/embed/${F.youtubeId}" title="${escapeHtml(F.videoTitle)}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`
                 : ""
             }
           </div>
@@ -1647,7 +1665,7 @@
       if (!ok) return;
       const svc = RUKN.services.find((s) => s.id === form.service.value);
       const msg = `السلام عليكم،
-أرغب في طلب خدمة من أكاديمية بكر الرقمية.
+أرغب في طلب خدمة من بكر الحلول الرقمية.
 الاسم: ${form.fullname.value}
 الجامعة: ${form.university.value}
 التخصص: ${form.spec.value}
@@ -1683,7 +1701,7 @@
         if (phoneErr) phoneErr.style.display = "block";
       }
       if (!ok) return;
-      const msg = `السلام عليكم، رسالة من موقع أكاديمية بكر الرقمية
+      const msg = `السلام عليكم، رسالة من موقع بكر الحلول الرقمية
 الاسم: ${form.fullname.value}
 الهاتف: ${form.phone.value}
 الرسالة: ${form.message.value}`;
@@ -1829,26 +1847,48 @@
       script.type = "application/ld+json";
       script.textContent = JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        name: B.fullName,
-        description: B.description,
-        telephone: B.phoneTel,
-        email: B.email,
-        url: origin,
-        image,
-        areaServed: "YE",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "تعز",
-          addressCountry: "YE"
-        },
-        founder: {
-          "@type": "Person",
-          name: B.founder.name,
-          url: B.founder.url,
-          jobTitle: B.founder.title
-        },
-        sameAs: [B.founder.url, B.founder.youtubeChannel].filter(Boolean)
+        "@graph": [
+          {
+            "@type": ["ProfessionalService", "Organization"],
+            "@id": origin + "#org",
+            name: B.fullName,
+            alternateName: ["بكر الحلول", "Bakr Digital Solutions"],
+            description: B.description,
+            telephone: B.phoneTel,
+            email: B.email,
+            url: B.siteUrl || origin,
+            image,
+            areaServed: ["YE", "تعز"],
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "تعز",
+              addressCountry: "YE"
+            },
+            founder: { "@id": origin + "#founder" },
+            sameAs: [B.founder.url, B.founder.youtubeChannel, B.founder.linkedin].filter(Boolean)
+          },
+          {
+            "@type": "Person",
+            "@id": origin + "#founder",
+            name: B.founder.name,
+            alternateName: B.founder.aliases || [],
+            honorificPrefix: "المهندس",
+            jobTitle: B.founder.role,
+            description: B.founder.bio,
+            url: B.founder.url,
+            image: new URL(ROOT + "assets/images/Abobakr_Hassan.png", location.origin).href,
+            worksFor: { "@id": origin + "#org" },
+            sameAs: [B.founder.url, B.founder.youtubeChannel, B.founder.linkedin].filter(Boolean)
+          },
+          {
+            "@type": "WebSite",
+            "@id": origin + "#website",
+            name: B.fullName,
+            url: B.siteUrl || origin,
+            inLanguage: "ar",
+            publisher: { "@id": origin + "#org" }
+          }
+        ]
       });
       document.head.appendChild(script);
     }
@@ -1900,8 +1940,6 @@
     howSteps();
     whyGrid();
     specsPage();
-    homeProposed();
-    proposedCatalog();
     projects("#homeProjects", 6);
     projects("#projectsGrid");
     testimonials();
